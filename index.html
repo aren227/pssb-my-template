@@ -375,7 +375,7 @@
                 .when('/:name', {
                     templateUrl: function(urlattr){
                         console.log(urlattr.name); //:name
-                        return 'posts/' + urlattr.name + '.html';
+                        return 'posts__/' + urlattr.name + '.html';
                     }
                 })
                 .otherwise({
