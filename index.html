@@ -532,19 +532,22 @@
                     </div>
                 </div>
                 <div class="feed">
-                    <div style="margin-bottom: 20px;" ng-hide="isMainPage || isError">
+                    <div style="margin-bottom: 10px;" ng-hide="isMainPage || isError">
                         <div style="font-size: 2.5em; margin-top: 20px;">
                             {{currentPost.title}}
                         </div>
-                        <div style="display: flex; flex-direction: row;">
+                        <div style="display: flex; flex-direction: row; margin-top: 10px;">
                             <i data-feather="calendar" style="margin-right: 7px; width: 20px !important; height: 20px !important;"></i>
                             <div>
-                                {{currentPost.time}}
+                                {{currentPost.creation_time}}
                             </div>
                             <div class="project" style="margin: 0px; margin-left: 12px; background: {{projectColorBinding[currentPost.project]}};">
                                 {{currentPost.project}}
                             </div>
                         </div>
+                    </div>
+                    <div class="loader" ng-show="isLoading">
+
                     </div>
                     <div id="main-view" style="font-size: 1.2rem;" ng-view>
                         
@@ -578,9 +581,7 @@
             </div>
         </div>
         <div class="screen-white" id="screen-white">
-            <div class="loader" ng-show="isLoading">
-
-            </div>
+            
         </div>
         <script>
             feather.replace()
