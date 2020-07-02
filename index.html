@@ -304,8 +304,16 @@
                         $scope.posts = response.data.posts;
                         $scope.tags = response.data.tags;
 
-                        for(var i = 0; i < $scope.projects.length; i++){
-                            $scope.projectColorBinding[$scope.projects[i].name] = $scope.projects[i].color;
+                        var sr = 63, sg = 235, sb = 226;
+                        var er = 126, eg = 101, eb = 247;
+                        
+                        if($scope.projects.length == 1){
+                            $scope.projectColorBinding[$scope.projects[i]] = "rgb(" + sr + ", " + sg + ", " + sb + ")";
+                        }
+                        else if($scope.projects.length > 1){
+                            for(var i = 0; i < $scope.projects.length; i++){
+                                $scope.projectColorBinding[$scope.projects[i]] = "rgb(" + int(Math.min(sr, er) + Math.abs(sr - er) * (i / ($scope.projects.length - 1))) + ", " + int(Math.min(sg, eg) + Math.abs(sg - eg) * (i / ($scope.projects.length - 1))) + ", " + int(Math.min(sb, eb) + Math.abs(sb - eb) * (i / ($scope.projects.length - 1))) + ")";
+                            }
                         }
 
                         $scope.updateCurrentPost();
@@ -546,8 +554,8 @@
                         <input type="text" ng-model="search" placeholder="Search Title..." class="text-input">
                         <h3>Projects</h3>
                         <div>
-                            <div class="project" ng-repeat="project in projects" style="background: {{project.color}};">
-                                {{project.name}}
+                            <div class="project" ng-repeat="project in projects" style="background: {{projectColorBinding[project]}};">
+                                {{project}}
                             </div>
                         </div>
                         <h3>Tags</h3>
