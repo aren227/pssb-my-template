@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>
-            Test
+            aren227's Dev Archive
         </title>
         <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
         <style>
@@ -124,6 +124,7 @@
                 font-weight: bold;
                 border-radius: 5px;
                 display: inline-block;
+                width: fit-content;
                 padding: 1px 5px;
                 margin: 2px 0;
             }
@@ -304,16 +305,21 @@
                         $scope.posts = response.data.posts;
                         $scope.tags = response.data.tags;
 
-                        var sr = 63, sg = 235, sb = 226;
-                        var er = 126, eg = 101, eb = 247;
+                        var sr = 108, sg = 96, sb = 240;
+                        var er = 65, eg = 240, eb = 240;
                         
                         if($scope.projects.length == 1){
                             $scope.projectColorBinding[$scope.projects[i]] = "rgb(" + sr + ", " + sg + ", " + sb + ")";
                         }
                         else if($scope.projects.length > 1){
                             for(var i = 0; i < $scope.projects.length; i++){
-                                $scope.projectColorBinding[$scope.projects[i]] = "rgb(" + int(Math.min(sr, er) + Math.abs(sr - er) * (i / ($scope.projects.length - 1))) + ", " + int(Math.min(sg, eg) + Math.abs(sg - eg) * (i / ($scope.projects.length - 1))) + ", " + int(Math.min(sb, eb) + Math.abs(sb - eb) * (i / ($scope.projects.length - 1))) + ")";
+                                $scope.projectColorBinding[$scope.projects[i]] = "rgb(" + Math.floor(sr + (er - sr) * (i / ($scope.projects.length - 1))) + ", " + Math.floor(sg + (eg - sg) * (i / ($scope.projects.length - 1))) + ", " + Math.floor(sb + (eb - sb) * (i / ($scope.projects.length - 1))) + ")";
                             }
+                        }
+
+                        for(var post of $scope.posts){
+                            var date = new Date(post.creation_time * 1000);
+                            post.creation_time = date.toISOString().substr(0, 10);
                         }
 
                         $scope.updateCurrentPost();
@@ -352,12 +358,13 @@
                     white.classList.remove("screen-white-animation");
                     white.offsetWidth; //important
                     white.classList.add("screen-white-animation");
+
+                    document.getElementById("main-view").innerHTML = "";
                 });
                 $scope.$on('$routeChangeError', 
                     function (event, current, previous, rejection) {
                         $scope.isLoading = false;
                         $scope.isError = true;
-                        document.getElementById("main-view").innerHTML = "";
                     }
                 )
                 $scope.$on('$routeChangeSuccess', 
@@ -553,7 +560,7 @@
                         <h3>Search</h3>
                         <input type="text" ng-model="search" placeholder="Search Title..." class="text-input">
                         <h3>Projects</h3>
-                        <div>
+                        <div style="display: flex; flex-direction: column;">
                             <div class="project" ng-repeat="project in projects" style="background: {{projectColorBinding[project]}};">
                                 {{project}}
                             </div>
