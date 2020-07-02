@@ -1,0 +1,43 @@
+<div style="font-size: 1.2rem; font-weight: bold; margin: 20px 0;">
+    Recent Posts
+</div>
+<div class="post" ng-repeat="post in posts | filter:searchFunction" ng-mouseover="hover = true" ng-mouseleave="hover = false" ng-init="hover = false">
+    <div class="vert-line" style="background: {{projectColorBinding[post.project]}};">
+
+    </div>
+    <div style="flex: 1 1 auto; width: 100px; position: relative;">
+        <div class="time">
+            <div style="padding-top: 10px; overflow: visible; font-size: 0.8rem;">
+                {{post.time}}
+            </div>
+        </div>
+        <div style="position:absolute; left:74px; top: 12px;">
+            <svg height="14px" width="14px" style="position:absolute; left: 0px; top: 0px">
+                <circle cx="7" cy="7" r="7" fill="{{projectColorBinding[post.project]}}"/>
+            </svg>
+            <svg height="8px" width="8px" style="position:absolute; left: 3px; top: 3px">
+                <circle cx="4" cy="4" r="4" fill="#eeeeee"/>
+            </svg>
+            <svg height="14px" width="14px" style="position:absolute; left: 0px; top: 0px; animation: scaleout 1.0s infinite ease-in-out;" ng-show="hover">
+                <circle cx="7" cy="7" r="7" fill="{{projectColorBinding[post.project]}}"/>
+            </svg>
+        </div>
+    </div>
+    <div style="flex: 10 1 auto; width: 100%; padding-left: 20px; padding-bottom: 50px;">
+        <div class="post-title">
+            {{post.title}}
+        </div>
+        <div class="post-preview">
+            {{post.preview}}
+        </div>
+        <div style="margin-top: 10px;">
+            <div class="hashtag" ng-repeat="tag in post.tags" style="color: {{projectColorBinding[post.project]}}; border-color: {{projectColorBinding[post.project]}};">
+                {{tag}}
+            </div>
+        </div>
+    </div>
+    <div style="flex: 0.1 0.1 auto; width: 5em; height: 5em; margin-top: 15px; margin-left: 10px; border-radius: 7px; background: url({{post.thumbnail}});  background-size: 100% 100%;">
+    </div>
+    <a style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;" href="#!{{post.id}}">
+    </a>
+</div>

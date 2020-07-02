@@ -1,0 +1,612 @@
+<html>
+    <head>
+        <title>
+            Test
+        </title>
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Lora', 'Nanum Myeongjo', serif;
+                scroll-behavior: smooth;
+            }
+
+            .sky_head{
+                background: linear-gradient(to top, #275dc9 0%, #282a66 95%);
+                width: 100%;
+                height: 30em;
+                position: relative;
+            }
+            .sky_head2{
+                background: linear-gradient(60deg, #6f16ff41 0%, #00000000 40%, #00000000 60%, #6f16ff57 100%);
+                width: 100%;
+                height: 30em;
+                mix-blend-mode: screen;
+                position: absolute;
+            }
+            .sky_head3{
+                background: linear-gradient(60deg, #797ef6 0%, #4adede 100%);
+                width: 100%;
+                height: 30em;
+                position: relative;
+                overflow: hidden;
+            }
+            .wave_head{
+                height: 5em;
+                position: absolute;
+                bottom: 0;
+                width: 200%;
+                animation: move_wave 5s linear infinite;
+            }
+            .wave_head_2{
+                height: 5em;
+                position: absolute;
+                bottom: 0;
+                width: 200%;
+                animation: move_wave_2 5s linear infinite;
+            }
+            .title{
+                text-align: center;
+                color: #eef5ff;
+                font-size: 5em;
+                font-weight: bolder;
+                position: absolute;
+                top: 1.9em;
+                width: 100%;
+                text-shadow: #eef5ff7f 0px 0px 10px;
+            }
+            .left{
+                flex: 1 1 auto;
+                max-width: 15em;
+                height: 20em;
+                margin: 30px;
+            }
+            .margin{
+                max-width: 30%;
+                flex: 1 1 auto;
+            }
+            .feed{
+                width: 50em;
+                flex: 0 0 auto;
+                display: flex;
+                flex-direction: column;
+                position: relative;  /*for vert-line*/
+                margin-left: 30px;
+                margin-right: 30px;
+                margin-top: 30px;
+            }
+            .post{
+                margin: 0px 10px;
+                display: flex;
+                flex: 1 1 auto;
+                width: 100%;
+                transition: 1s;
+                position: relative;
+            }
+            .post:hover {
+                transform:translateY(-10px);
+            }
+            .post-title{
+                font-size: 1.8rem;
+                font-weight: bolder;
+                color:#3f3f3f;
+            }
+            .post-preview{
+                font-size: 1.2rem;
+                color:#3f3f3f;
+                display: inline-block;
+                padding-top: 5px;
+            }
+            .time{
+                font-size: 0.75em;
+                color: gray;
+                float: left;
+            }
+            .vert-line{
+                width: 2px;
+                top: 15px;
+                bottom:-25px;
+                left: 80px;
+                position: absolute;
+            }
+            .hashtag{
+                color: #505050;
+                border-color: #505050;
+                border: 1px solid;
+                font-size: 1rem;
+                font-weight: bold;
+                border-radius: 5px;
+                display: inline-block;
+                padding: 1px 5px;
+                margin: 2px 3px;
+            }
+            .project{
+                color: white;
+                font-weight: bold;
+                border-radius: 5px;
+                display: inline-block;
+                padding: 1px 5px;
+                margin: 2px 0;
+            }
+            .time-select-animation{
+                animation: scaleout 1.0s infinite ease-in-out;
+            }
+            .star{
+                opacity: var(--star-glow, 1);
+                transform-box: fill-box;
+                transform-origin: center;
+                transform: rotate(45deg);
+            }
+            @keyframes scaleout {
+            0% {
+                transform: scale(0.0);
+                -webkit-transform: scale(0.0);
+            } 100% {
+                transform: scale(2.0);
+                -webkit-transform: scale(2.0);
+                opacity: 0;
+            }
+            }
+            @keyframes glowing {
+            0% {
+                opacity: 0;
+            }
+            30% {
+                opacity: 0.8;
+            }
+            40% {
+                opacity: 0.3;
+            }
+            70% {
+                opacity: 1.0;
+            }
+            100% {
+                opacity: 0;
+            }
+            }
+            @keyframes move_wave {
+                0% {
+                    transform: translateX(0)
+                }
+                100% {
+                    transform: translateX(-100%)
+                }
+            }
+            @keyframes move_wave_2 {
+                0% {
+                    transform: translateX(100%)
+                }
+                100% {
+                    transform: translateX(0)
+                }
+            }
+            .loader,
+            .loader:before,
+            .loader:after {
+                border-radius: 50%;
+                width: 2.5em;
+                height: 2.5em;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+                -webkit-animation: load7 1.8s infinite ease-in-out;
+                animation: load7 1.8s infinite ease-in-out;
+            }
+            .loader {
+                color: #adadad;
+                font-size: 10px;
+                margin: 80px auto;
+                position: relative;
+                text-indent: -9999em;
+                -webkit-transform: translateZ(0);
+                -ms-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-animation-delay: -0.16s;
+                animation-delay: -0.16s;
+            }
+            .loader:before,
+            .loader:after {
+                content: '';
+                position: absolute;
+                top: 0;
+            }
+            .loader:before {
+                left: -3.5em;
+                -webkit-animation-delay: -0.32s;
+                animation-delay: -0.32s;
+            }
+            .loader:after {
+                left: 3.5em;
+            }
+            @-webkit-keyframes load7 {
+                0%,
+                80%,
+                100% {
+                    box-shadow: 0 2.5em 0 -1.3em;
+                }
+                40% {
+                    box-shadow: 0 2.5em 0 0;
+                }
+            }
+            @keyframes load7 {
+                0%,
+                80%,
+                100% {
+                    box-shadow: 0 2.5em 0 -1.3em;
+                }
+                40% {
+                    box-shadow: 0 2.5em 0 0;
+                }
+            }
+            .error{
+                color: #adadad;
+                font-size: 2em;
+                width: 100%;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                margin-top: 100px;
+            }
+            .screen-white{
+                background-color: #eef5ff;
+                opacity: 0;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                pointer-events: none;
+            }
+            .screen-white-animation {
+                animation: fade-in 0.4s ease-out;
+            }
+            @keyframes fade-in {
+                0%
+                {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+            .text-input {
+                width: 100%;
+                border: 1px solid #7f7f7f7f;
+                border-radius: 5px;
+                background: #00000000;
+                padding: 3px;
+                font-size: 1rem;
+                font-family: 'Lora', 'Nanum Myeongjo', serif;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.js"></script>
+        <script>
+            var myApp = angular.module('myApp', ['ngRoute']);
+            myApp.controller('FeedCtrl', function ($scope, $http) {
+                $scope.projects = [];
+                $scope.posts = [];
+                $scope.tags = [];
+
+                $scope.projectColorBinding = {};
+
+                $scope.search = "";
+                
+                $scope.isLoading = true;
+                $scope.isError = false;
+
+                $scope.prevHeight = 0;
+
+                $http.get('posts.json').then(
+                    function(response)
+                    {
+                        if(response.status != 200) return;
+
+                        $scope.projects = response.data.projects;
+                        $scope.posts = response.data.posts;
+                        $scope.tags = response.data.tags;
+
+                        for(var i = 0; i < $scope.projects.length; i++){
+                            $scope.projectColorBinding[$scope.projects[i].name] = $scope.projects[i].color;
+                        }
+
+                        $scope.updateCurrentPost();
+
+                        $scope.isLoading = false;
+                    }
+                );
+
+                $scope.searchFunction = function (item) {
+                    return item.title.search($scope.search) != -1;
+                };
+
+                $scope.updateCurrentPost = function () {
+                    if(!$scope.isMainPage){
+                        for(var post of $scope.posts){
+                            if(post.id == $scope.currentPostId){
+                                $scope.currentPost = post;
+                                break;
+                            }
+                        }
+                    }
+                };
+
+                $scope.currentPost = {};
+
+                $scope.$on('$routeChangeStart', function($event, next, current) {
+                    $scope.isMainPage = Object.keys(next.params).length == 0;
+                    if(!$scope.isMainPage){
+                        $scope.currentPostId = next.params.name;
+                    }
+                    $scope.updateCurrentPost();
+                    $scope.isLoading = true;
+                    $scope.isError = false;
+
+                    var white = document.getElementById("screen-white");
+                    white.classList.remove("screen-white-animation");
+                    white.offsetWidth; //important
+                    white.classList.add("screen-white-animation");
+                });
+                $scope.$on('$routeChangeError', 
+                    function (event, current, previous, rejection) {
+                        $scope.isLoading = false;
+                        $scope.isError = true;
+                        document.getElementById("main-view").innerHTML = "";
+                    }
+                )
+                $scope.$on('$routeChangeSuccess', 
+                    function (event, current, previous) {
+                        $scope.isLoading = false;
+                        $scope.isError = false;
+                    }
+                )
+            });
+            myApp.config(function ($routeProvider, $locationProvider) {
+                $routeProvider
+                .when('/', {
+                    templateUrl: 'posts.html'
+                })
+                .when('/:name', {
+                    templateUrl: function(urlattr){
+                        console.log(urlattr.name); //:name
+                        return 'posts/' + urlattr.name + '.html';
+                    }
+                })
+                .otherwise({
+                    redirectTo: '/'
+                });
+            });
+        </script>
+        <script>
+            var finalTitle = "My Dev Archive.";
+            var title = "";
+            var write = function () {
+                if(title.length == finalTitle.length) return;
+                title += finalTitle[title.length];
+                document.getElementById("title").innerText = title + (title.length < finalTitle.length ? "|" : "");
+                setTimeout(write, Math.random() * 80 + 80);
+            };
+            setTimeout(write, 100);
+        </script>
+        <script>
+            /*
+            var commands = "";
+            var width = 1440;
+            var height = 320;
+            var widthDelta = 150;
+            var heightDelta = 70;
+
+            var lastX = 0;
+            var lastY = height / 2;
+
+            commands += "M" + 0 + "," + height;
+            commands += "L" + lastX + "," + lastY;
+
+            while(true){
+                if(lastX > width - widthDelta * 2){
+                    var nextX = width;
+                    var nextY = height / 2;
+                    var nextControlX = width - widthDelta / 2;
+                    var nextControlY = nextY;
+                    commands += "S" + Math.floor(nextControlX) + "," + Math.floor(nextControlY) + "," + Math.floor(nextX) + "," + Math.floor(nextY);
+                    commands += "L" + width + "," + height;
+                    commands += "L" + 0 + "," + height;
+                    break;
+                }
+                else{
+                    var nextX = lastX + widthDelta + Math.random() * widthDelta / 3;
+                    var nextY = Math.random() * heightDelta + height / 2;
+                    var nextControlX = nextX - (widthDelta / 2) + Math.random() * (widthDelta / 2);
+                    var nextControlY = nextY;
+                    if(lastX == 0){
+                        var currentControlX = nextX + widthDelta / 2;
+                        var currentControlY = nextY;
+                        commands += "C" + Math.floor(currentControlX) + "," + Math.floor(currentControlY) + "," + Math.floor(nextControlX) + "," + Math.floor(nextControlY) + "," + Math.floor(nextX) + "," + Math.floor(nextY);
+                    }
+                    else{
+                        commands += "S" + Math.floor(nextControlX) + "," + Math.floor(nextControlY) + "," + Math.floor(nextX) + "," + Math.floor(nextY);
+                    }
+                }
+                lastX = nextX;
+                lastY = nextY;
+            }
+
+            commands += "Z";
+
+            console.log(commands);
+            */
+        </script>
+        <script src="https://unpkg.com/feather-icons"></script>
+    </head>
+    <body style="background-color: #eef5ff; margin: 0px;" ng-app="myApp">
+        <div class="sky_head3" name="sky">
+            <svg class="wave_head" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 320" preserveAspectRatio="none" style="animation-duration: 60s;">
+                <defs>
+                    <!-- Loopable wave from https://getwaves.io/ and http://svghelper.com/ -->
+                    <path id="random-wave" d="M0,160C40,160,51,128,76,128C101.1,128,126,160,152,170.7C176.8,181,202,171,227,138.7C252.6,107,278,53,303,58.7C328.4,64,354,128,379,170.7C404.2,213,429,235,455,250.7C480,267,505,277,531,261.3C555.8,245,581,203,606,181.3C631.6,160,657,160,682,186.7C707.4,213,733,267,758,266.7C783.2,267,808,213,834,181.3C858.9,149,884,139,909,138.7C934.7,139,960,149,985,165.3C1010.5,181,1036,203,1061,213.3C1086.3,224,1112,224,1137,218.7C1162.1,213,1187,203,1213,192C1237.9,181,1263,171,1288,176C1313.7,181,1339,203,1364,202.7C1389.5,203,1400,160,1440,160L1440,320L1427.4,320C1414.7,320,1389,320,1364,320C1338.9,320,1314,320,1288,320C1263.2,320,1238,320,1213,320C1187.4,320,1162,320,1137,320C1111.6,320,1086,320,1061,320C1035.8,320,1011,320,985,320C960,320,935,320,909,320C884.2,320,859,320,834,320C808.4,320,783,320,758,320C732.6,320,707,320,682,320C656.8,320,632,320,606,320C581.1,320,556,320,531,320C505.3,320,480,320,455,320C429.5,320,404,320,379,320C353.7,320,328,320,303,320C277.9,320,253,320,227,320C202.1,320,177,320,152,320C126.3,320,101,320,76,320C50.5,320,25,320,13,320L0,320Z"/>
+                </defs>
+                <g>
+                    <use xlink:href="#random-wave" x="0" y="0" fill="#eef5ff" fill-opacity="1"/>
+                </g>
+            </svg>
+            <svg class="wave_head_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 320" preserveAspectRatio="none" style="animation-duration: 60s;">
+                <defs>
+                    <path id="random-wave" d="M0,160C40,160,51,128,76,128C101.1,128,126,160,152,170.7C176.8,181,202,171,227,138.7C252.6,107,278,53,303,58.7C328.4,64,354,128,379,170.7C404.2,213,429,235,455,250.7C480,267,505,277,531,261.3C555.8,245,581,203,606,181.3C631.6,160,657,160,682,186.7C707.4,213,733,267,758,266.7C783.2,267,808,213,834,181.3C858.9,149,884,139,909,138.7C934.7,139,960,149,985,165.3C1010.5,181,1036,203,1061,213.3C1086.3,224,1112,224,1137,218.7C1162.1,213,1187,203,1213,192C1237.9,181,1263,171,1288,176C1313.7,181,1339,203,1364,202.7C1389.5,203,1400,160,1440,160L1440,320L1427.4,320C1414.7,320,1389,320,1364,320C1338.9,320,1314,320,1288,320C1263.2,320,1238,320,1213,320C1187.4,320,1162,320,1137,320C1111.6,320,1086,320,1061,320C1035.8,320,1011,320,985,320C960,320,935,320,909,320C884.2,320,859,320,834,320C808.4,320,783,320,758,320C732.6,320,707,320,682,320C656.8,320,632,320,606,320C581.1,320,556,320,531,320C505.3,320,480,320,455,320C429.5,320,404,320,379,320C353.7,320,328,320,303,320C277.9,320,253,320,227,320C202.1,320,177,320,152,320C126.3,320,101,320,76,320C50.5,320,25,320,13,320L0,320Z"/>
+                </defs>
+                <g>
+                    <use xlink:href="#random-wave" x="0" y="0" fill="#eef5ff" fill-opacity="1"/>
+                </g>
+            </svg>
+            <svg class="wave_head" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 320" preserveAspectRatio="none" style="animation-duration: 30s;">
+                <defs>
+                    <path id="random-wave2" d="M0,128C25.3,128,51,85,76,74.7C101.1,64,126,64,152,101.3C176.8,139,202,213,227,234.7C252.6,256,278,224,303,218.7C328.4,213,354,235,379,234.7C404.2,235,429,213,455,176C480,139,505,85,531,85.3C555.8,85,581,139,606,165.3C631.6,192,657,192,682,165.3C707.4,139,733,85,758,96C783.2,107,808,181,834,229.3C858.9,277,884,299,909,293.3C934.7,288,960,256,985,213.3C1010.5,171,1036,117,1061,85.3C1086.3,53,1112,43,1137,80C1162.1,117,1187,203,1213,240C1237.9,277,1263,267,1288,234.7C1313.7,203,1339,149,1364,128C1389.5,107,1415,117,1440,128L1440,320L1427.4,320C1414.7,320,1389,320,1364,320C1338.9,320,1314,320,1288,320C1263.2,320,1238,320,1213,320C1187.4,320,1162,320,1137,320C1111.6,320,1086,320,1061,320C1035.8,320,1011,320,985,320C960,320,935,320,909,320C884.2,320,859,320,834,320C808.4,320,783,320,758,320C732.6,320,707,320,682,320C656.8,320,632,320,606,320C581.1,320,556,320,531,320C505.3,320,480,320,455,320C429.5,320,404,320,379,320C353.7,320,328,320,303,320C277.9,320,253,320,227,320C202.1,320,177,320,152,320C126.3,320,101,320,76,320C50.5,320,25,320,13,320L0,320Z"/>
+                </defs>
+                <g>
+                    <use xlink:href="#random-wave2" x="0" y="0" fill="#eef5ff" fill-opacity="0.7" />
+                </g>
+            </svg>
+            <svg class="wave_head_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 320" preserveAspectRatio="none" style="animation-duration: 30s;">
+                <defs>
+                    <path id="random-wave2" d="M0,128C25.3,128,51,85,76,74.7C101.1,64,126,64,152,101.3C176.8,139,202,213,227,234.7C252.6,256,278,224,303,218.7C328.4,213,354,235,379,234.7C404.2,235,429,213,455,176C480,139,505,85,531,85.3C555.8,85,581,139,606,165.3C631.6,192,657,192,682,165.3C707.4,139,733,85,758,96C783.2,107,808,181,834,229.3C858.9,277,884,299,909,293.3C934.7,288,960,256,985,213.3C1010.5,171,1036,117,1061,85.3C1086.3,53,1112,43,1137,80C1162.1,117,1187,203,1213,240C1237.9,277,1263,267,1288,234.7C1313.7,203,1339,149,1364,128C1389.5,107,1415,117,1440,128L1440,320L1427.4,320C1414.7,320,1389,320,1364,320C1338.9,320,1314,320,1288,320C1263.2,320,1238,320,1213,320C1187.4,320,1162,320,1137,320C1111.6,320,1086,320,1061,320C1035.8,320,1011,320,985,320C960,320,935,320,909,320C884.2,320,859,320,834,320C808.4,320,783,320,758,320C732.6,320,707,320,682,320C656.8,320,632,320,606,320C581.1,320,556,320,531,320C505.3,320,480,320,455,320C429.5,320,404,320,379,320C353.7,320,328,320,303,320C277.9,320,253,320,227,320C202.1,320,177,320,152,320C126.3,320,101,320,76,320C50.5,320,25,320,13,320L0,320Z"/>
+                </defs>
+                <g>
+                    <use xlink:href="#random-wave2" x="0" y="0" fill="#eef5ff" fill-opacity="0.7" />
+                </g>
+            </svg>
+            <svg class="wave_head" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 320" preserveAspectRatio="none" style="animation-duration: 15s;">
+                <defs>
+                    <path id="random-wave3" d="M0,261C43.6,261,87,181,131,165.3C174.5,149,218,171,262,154.7C305.5,139,349,85,393,96C436.4,107,480,181,524,186.7C567.3,192,611,128,655,90.7C698.2,53,742,43,785,69.3C829.1,96,873,160,916,197.3C960,235,1004,245,1047,224C1090.9,203,1135,149,1178,138.7C1221.8,130,1265,150,1330,190C1392.7,230,1400,261,1440,261L1440,320L1418.2,320C1396.4,320,1353,320,1309,320C1265.5,320,1222,320,1178,320C1134.5,320,1091,320,1047,320C1003.6,320,960,320,916,320C872.7,320,829,320,785,320C741.8,320,698,320,655,320C610.9,320,567,320,524,320C480,320,436,320,393,320C349.1,320,305,320,262,320C218.2,320,175,320,131,320C87.3,320,44,320,22,320L0,320Z"/>
+                </defs>
+                <g>
+                    <use xlink:href="#random-wave3" x="0" y="0" fill="#eef5ff" fill-opacity="0.2" />
+                </g>
+            </svg>
+            <svg class="wave_head_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 320" preserveAspectRatio="none" style="animation-duration: 15s;">
+                <defs>
+                    <path id="random-wave3" d="M0,261C43.6,261,87,181,131,165.3C174.5,149,218,171,262,154.7C305.5,139,349,85,393,96C436.4,107,480,181,524,186.7C567.3,192,611,128,655,90.7C698.2,53,742,43,785,69.3C829.1,96,873,160,916,197.3C960,235,1004,245,1047,224C1090.9,203,1135,149,1178,138.7C1221.8,130,1265,150,1330,190C1392.7,230,1400,261,1440,261L1440,320L1418.2,320C1396.4,320,1353,320,1309,320C1265.5,320,1222,320,1178,320C1134.5,320,1091,320,1047,320C1003.6,320,960,320,916,320C872.7,320,829,320,785,320C741.8,320,698,320,655,320C610.9,320,567,320,524,320C480,320,436,320,393,320C349.1,320,305,320,262,320C218.2,320,175,320,131,320C87.3,320,44,320,22,320L0,320Z"/>
+                </defs>
+                <g>
+                    <use xlink:href="#random-wave3" x="0" y="0" fill="#eef5ff" fill-opacity="0.2" />
+                </g>
+            </svg>
+            <div class="title" id="title">
+                
+            </div>
+        </div>
+        <div>
+            <div style="display: flex;" ng-controller="FeedCtrl">
+                <div class="margin"></div>
+                <div class="left">
+                    <h3>About Me</h3>
+                    <div style="position: relative; width: 100%; padding-top: 100%;">
+                        <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; border-radius: 50%; background: url(https://avatars0.githubusercontent.com/u/14082448?s=460&u=5970b8a9a1c74a38c487d14db7f49f4985d9ff89&v=4); background-size: 100% 100%;">
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; font-size: 1.5em; font-weight: bold;">
+                        aren227(Lazyslime)
+                    </div>
+                    <div style="margin-top: 5px; font-size: 1.2em;">
+                        Interested in Game Development, Machine Learning and Algorithms.
+                    </div>
+                    <div style="margin-top: 20px; display: flex; align-content: center; font-size: 1.2em;">
+                        <i data-feather="map-pin" style="margin-right: 7px; height: 80%;"></i>
+                        South Korea
+                    </div>
+                    <div style="margin-top: 10px; display: flex; align-content: center; font-size: 1.2em;">
+                        <i data-feather="github" style="margin-right: 7px; height: 80%;"></i>
+                        <a href="https://github.com/aren227" style="color: black;">aren227</a>
+                    </div>
+                </div>
+                <div class="feed">
+                    <div style="margin-bottom: 20px;" ng-hide="isMainPage || isError">
+                        <div style="font-size: 2.5em;">
+                            {{currentPost.title}}
+                        </div>
+                        <div style="display: flex; flex-direction: row;">
+                            <i data-feather="calendar" style="margin-right: 7px; width: 20px !important; height: 20px !important;"></i>
+                            <div>
+                                {{currentPost.time}}
+                            </div>
+                            <div class="project" style="margin: 0px; margin-left: 12px; background: {{projectColorBinding[currentPost.project]}};">
+                                {{currentPost.project}}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="main-view" style="font-size: 1.2rem;" ng-view>
+                        
+                    </div>
+                    <div class="error" ng-show="isError">
+                        Something went wrong :(
+                        <a href="javascript:history.go(-1)" style="width: 100%; margin-top: 20px; font-size: 0.75em; color: gray;">
+                            Go to Main Page
+                        </a>
+                    </div>
+                </div>
+                <div class="left">
+                    <div ng-show="isMainPage">
+                        <h3>Search</h3>
+                        <input type="text" ng-model="search" placeholder="Search Title..." class="text-input">
+                        <h3>Projects</h3>
+                        <div>
+                            <div class="project" ng-repeat="project in projects" style="background: {{project.color}};">
+                                {{project.name}}
+                            </div>
+                        </div>
+                        <h3>Tags</h3>
+                        <div>
+                            <div class="hashtag" ng-repeat="tag in tags" style="">
+                                {{tag}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="margin"></div>
+            </div>
+        </div>
+        <div class="screen-white" id="screen-white">
+            <div class="loader" ng-show="isLoading">
+
+            </div>
+        </div>
+        <script>
+            feather.replace()
+        </script>
+    </body>
+    <script>
+        //Star
+        const svgElement = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
+        svgElement.setAttribute('viewbox', '0 0 2000 1000');
+        svgElement.setAttribute('preserveaspectratio', 'xMinYMin slice');
+        svgElement.setAttribute('width', '100%');
+        svgElement.setAttribute('height', '100%');
+
+        document.getElementsByName("sky")[0].appendChild(svgElement);
+
+        var seed = 0.333;
+        function random() {
+            var x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+        }
+
+        STAR_COORDS = [];
+        for(var i = 0; i < 100; i++){
+            STAR_COORDS.push({x: random() * 2000, y:random() * 1000});
+        }
+
+        STAR_COORDS.forEach(({x, y}, index) => {
+            //star circle shape
+            const star = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+            star.setAttribute('width', 5);
+            star.setAttribute('height', 5);
+            star.setAttribute('fill', 'white');
+            star.classList.add('star');
+            star.style.setProperty("--star-glow", random() * 0.4 + 0.1);
+
+            // group to hold the translation
+            const starTranslate = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+            starTranslate.setAttribute('transform', `translate(${x} ${y})`);
+            starTranslate.appendChild(star);
+
+            // add it your existing svg element.
+        svgElement.appendChild(starTranslate);
+        });
+    </script>
+</html>
